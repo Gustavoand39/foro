@@ -4,24 +4,24 @@
         <div class="col">
             <div class="card" style="width: 18 rem;">
                 <div class="card-header">
-                    Inicio de Sesion
+                    Inicio de Sesion {{user}}
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
                         <div class="input-group-text">
                             <i class="bi bi-person-circle"></i>
                         </div>
-                        <input type="text" class="form-control" placeholder="Nombre de usuario">
+                        <input [(ngModel)]="user" type="text" class="form-control" placeholder="Nombre de usuario">
                     </div>
                     <div class="input-group">
                         <div class="input-group-text">
                             <i class="bi bi-key-fill"></i>
                         </div>
-                        <input type="password" class="form-control" placeholder="Contraseña">
+                        <input [(ngModel)]="pass" type="password" class="form-control" placeholder="Contraseña">
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary">Entrar</button>
+                    <button (click)="entrar()" class="btn btn-primary">Entrar</button>
                 </div>
             </div>
         </div>
