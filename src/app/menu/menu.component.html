@@ -1,28 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <span class="navbar-brand"><i class="bi bi-chat-square-dots m-2"></i>Inserte nombre aquí</span>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div *ngIf="user.id" class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/home">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/posts">Publicaciones</a>
-          </li>
-          <li *ngIf="user.role == 'admin'" class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/users">Usuarios</a>
-          </li>
-          <li class="nav-item">
-            <a (click)="salir()" class="nav-link active" aria-current="page" routerLink="/">Salir</a>
-          </li>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand"><i class="bi bi-browser-edge"></i> Página Web</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div *ngIf="user.id" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home"><i class="bi bi-house-door-fill"></i> Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/posts"><i class="bi bi-journal-bookmark-fill"></i> Publicaciones</a>
+        </li>
+        <li *ngIf="user.role == 'admin'" class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/users"><i class="bi bi-people-fill"></i> Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="salir()" class="nav-link active" aria-current="page" routerLink="/"><i class="bi bi-box-arrow-in-left"></i> Salir</a>
+        </li>
 
-        </ul>
-        <span class="navbar-text border border-secundary rounded-pill ps-2 pe-2">
-            {{user.username}}
-        </span>
-      </div>
+      </ul>
+      <span class="navbar-text badge rounded-pill text-bg-secondary ps-2 pe-2">
+        <i class="bi bi-person-fill"></i> {{user.username}}
+      </span>
     </div>
-  </nav>
+  </div>
+</nav>

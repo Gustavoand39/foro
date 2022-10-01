@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '../api-rest.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   tmpTopic = {id:0, title:'', user_id:0};
   user = {id:0, username:"", role:""};
 
-  constructor( private rest: ApiRestService) { }
+  constructor( private rest: ApiRestService, private msg: ToastrService) { }
 
   ngOnInit(): void {
     this.readTopics();
@@ -26,7 +27,10 @@ export class HomeComponent implements OnInit {
     this.rest.getTopics(url).subscribe(
       r => {
         this.topics = r.data;
-        this.pages = r.links;
+        let pages = r.links;
+        pages.pop()
+        pages.shift()
+        this.pages = pages
       }
     );
   }
@@ -35,6 +39,7 @@ export class HomeComponent implements OnInit {
     this.rest.postTopics(this.newTopic).subscribe(
       r => {
         this.readTopics();
+        this.msg.success("Tema agregado");
       }
     );
   }
@@ -47,6 +52,7 @@ export class HomeComponent implements OnInit {
     this.rest.putTopics(this.tmpTopic).subscribe(
       r => {
         this.readTopics();
+        this.msg.info("¡Tema modificado!");
       },
     );
   }
@@ -55,6 +61,7 @@ export class HomeComponent implements OnInit {
     this.rest.deleteTopics(this.tmpTopic).subscribe(
       r => {
         this.readTopics();
+        this.msg.warning("¡Tema eliminado!");
       },
     );
   }

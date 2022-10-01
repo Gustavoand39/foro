@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '../api-rest.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,7 @@ import { ApiRestService } from '../api-rest.service';
 export class MenuComponent implements OnInit {
   user = {id:0, username:'', role:''};
   
-  constructor(private rest:ApiRestService) { }
+  constructor(private rest:ApiRestService, private msg: ToastrService) { }
 
   ngOnInit(): void {
     this.user = this.rest.getUser();
@@ -22,6 +23,7 @@ export class MenuComponent implements OnInit {
 
   salir(){
     this.rest.setUser({id:0, username:'', role:''});
+    this.msg.success("Sesión cerrada");
   }
 
 }

@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user:string = 'admin';
+  user:string = '';
   pass:string = '';
 
   constructor(private rest: ApiRestService,
@@ -25,9 +25,8 @@ export class LoginComponent implements OnInit {
         this.rest.setUser(response.user);
         localStorage.setItem('token', response.token)
         this.router.navigate(['/home']);
-        this.msg.success("Bienvenido");
-      },
-      error => {
+        this.msg.success("¡Bienvenido!", this.user.toUpperCase());
+      }, error => {
         this.msg.error("Error en el nombre o contraseña", error.status)
       }
     );

@@ -1,56 +1,67 @@
 <div class="container">
   <div class="row">
-      <div class="col"></div>
-      <div class="col">
-          <div class="card mt-3 mb-3">
-              <div class="card-header">
-                  Agregar Tema
-              </div>
-              <div class="card-body">
-                  <div class="input-group">
-                      <div class="input-group-text">
-                          <i class="bi bi-bookmark-check-fill"></i>
-                      </div>
-                      <input [(ngModel)]="newTopic.title" type="text" class="form-control">
-                  </div>
-              </div>
-              <div class="card-footer text-center">
-                  <input (click)="createTopic()" type="button" value="Guardar" class="btn btn-success">
-              </div>
+    <div class="col"></div>
+    <div class="col">
+      <div class="card mt-3 mb-3">
+        <div class="card-header">Agregar Tema</div>
+        <div class="card-body">
+          <div class="input-group">
+            <div class="input-group-text">
+              <i class="bi bi-plus-square-fill"></i>
+            </div>
+            <input autofocus [(ngModel)]="newTopic.title" type="text" class="form-control"/>
           </div>
+        </div>
+        <div class="card-footer text-center">
+          <input (click)="createTopic()" type="button" value="Guardar" class="btn btn-success"/>
+        </div>
       </div>
-      <div class="col"></div>
+    </div>
+    <div class="col"></div>
   </div>
+
   <div class="row">
-      <table class="table table-hover" [class.table-dark]="user.role == 'admin'">
-          <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Tema</th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let topic of topics">
-                  <td>{{topic.id}}</td>
-                  <td>{{topic.title}}</td>
-                  <th>
-                      <button *ngIf="user.role == 'admin' || user.id == topic.user_id" (click)="deleteTopic()" data-bs-toggle="modal" data-bs-target="#deleteTopic" (click)="selectTmpTopic(topic)" class="btn btn-outline-danger btn-sm float-end" ><i class="bi bi-trash"></i></button>
-                      <button *ngIf="user.role == 'admin' || user.id == topic.user_id" (click)="updateTopic()" data-bs-toggle="modal" data-bs-target="#editTopic" (click)="selectTmpTopic(topic)" class="btn btn-outline-success btn-sm float-end"><i class="bi bi-pencil-square"></i></button>    
-                  </th>
-              </tr>
-          </tbody>
-      </table>
-      <!-- Para la paginación -->
-      <nav>
-          <ul class="pagination">
-              <ng-container *ngFor="let page of pages">
-                  <li class="page-item">
-                      <button (click)="readTopics(page.url)" class="page-link" [class.active]="page.active">{{page.label}}</button>
-                  </li>
-              </ng-container>
-          </ul>
-      </nav>
+    <table class="table table-hover" [class.table-dark]="user.role == 'admin'" [class.table-light]="user.role != 'admin'">
+      <thead>
+        <tr>
+          <th [hidden]="user.role != 'admin'">ID</th>
+          <th>Tema</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let topic of topics">
+          <td [hidden]="user.role != 'admin'">{{ topic.id }}</td>
+          <td>{{ topic.title }}</td>
+          <th>
+            <button *ngIf="user.role == 'admin' || user.id == topic.user_id"
+              data-bs-toggle="modal" data-bs-target="#deleteTopic" (click)="selectTmpTopic(topic)"
+              class="btn btn-danger btn-sm float-end">
+              <i class="bi bi-trash"></i>
+            </button>
+            <button *ngIf="user.role == 'admin' || user.id == topic.user_id"
+              data-bs-toggle="modal" data-bs-target="#editTopic" (click)="selectTmpTopic(topic)"
+              class="btn btn-success btn-sm float-end">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Para la paginación -->
+    <nav class="d-flex justify-content-center">
+      <ul class="pagination ">
+        <ng-container *ngFor="let page of pages">
+          <li class="page-item">
+            <button (click)="readTopics(page.url)" class="page-link" [class.active]="page.active">
+              {{ page.label }}
+            </button>
+          </li>
+        </ng-container>
+      </ul>
+    </nav>
+
   </div>
 </div>
 
@@ -63,11 +74,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input [(ngModel)]="tmpTopic.title" type="text" class="form-control">
+        <input [(ngModel)]="tmpTopic.title" type="text" class="form-control" placeholder="Nombre del tema" autofocus />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button (click)="updateTopic()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button (click)="updateTopic()" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Guardar
+        </button>
       </div>
     </div>
   </div>
@@ -82,7 +97,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿Esta seguro de que desea eliminar el tema <b>{{tmpTopic.title}}</b>?
+        ¿Seguro que desea eliminar este tema?<br><b>{{tmpTopic.title}}</b>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>

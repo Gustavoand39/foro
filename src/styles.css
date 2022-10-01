@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+#card {
+    width: 30rem;
+    height: 14rem;
+    position: absolute;
+    margin: auto;
+    top: 0rem;
+    bottom: 0rem;
+    left: 0rem;
+    right: 0rem;
+}
+
+@media only screen and (max-width: 510px) {
+    #card {
+        min-width: 16rem;
+        width: 80%;
+        height: 40%;
+    }
+}
+
+.navbar-text.badge {
+    margin-right: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn.btn-danger, .btn.btn-success {
+    margin: auto .3rem;
+}
+
+.navbar.navbar-expand-lg {
+    min-width: 16rem;
+}
